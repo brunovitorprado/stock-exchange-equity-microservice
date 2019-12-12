@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Investor equity processor",
+    "description": "Microservice to process investor equity",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/equity": {
+      "get": {
+        "tags": [
+          "Equity"
+        ],
+        "summary": "Get investor equity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Equity"
+            }
+          }
+        }
+      }
+    },
+    "/equity/increase": {
+      "post": {
+        "tags": [
+          "Increase equity"
+        ],
+        "summary": "Increase investor equity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Purchase"
+            }
+          }
+        }
+      }
+    },
+    "/equity/decrease": {
+      "post": {
+        "tags": [
+          "Decrease equity"
+        ],
+        "summary": "Decrease investor equity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Purchase"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Equity": {
+      "required": [
+        "InvestorId",
+        "PurchaseId",
+        "Amount"
+      ],
+      "properties": {
+        "InvestorId": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "PurchaseId": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "Amount": {
+          "type": "double"
+        }
+      }
+    },
+    "Portfolio": {
+      "type": "array",
+      "$ref": "#/definitions/Equity"
+    }
+  }
+}
